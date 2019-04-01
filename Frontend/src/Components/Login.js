@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default class Login extends Component {
   state = {
@@ -20,7 +20,14 @@ export default class Login extends Component {
       })
     })
       .then(res => res.json())
-      .then(console.log);
+      .then(({ token, user }) => {
+        this.props.onLogin(token, user);
+        this.props.history.push(`/users/${user.id}`);
+        this.props.isLoggedIn();
+        // this.props.history.push(`/`);
+        // this.props.
+      });
+    // this.props.history.push(`/`);
   };
 
   handleChange = e => {
@@ -28,6 +35,7 @@ export default class Login extends Component {
   };
 
   render() {
+    const { username, password } = this.state;
     return (
       <div>
         <br />
@@ -40,7 +48,7 @@ export default class Login extends Component {
           <input
             className="username"
             type="text"
-            value={this.state.username}
+            value={username}
             placeholder="Enter Username"
             onChange={this.handleChange}
           />
@@ -51,7 +59,7 @@ export default class Login extends Component {
             className="password"
             type="password"
             placeholder="Enter Password"
-            value={this.state.password}
+            value={password}
             onChange={this.handleChange}
           />
         </div>

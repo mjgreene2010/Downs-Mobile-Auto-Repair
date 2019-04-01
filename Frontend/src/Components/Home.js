@@ -2,11 +2,31 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export default class Home extends Component {
+  state = {
+    user: {}
+  };
+
+  componentDidMount() {
+    fetch(`http://localhost:3000/users/${this.props.match.params.id}`, {
+      headers: {
+        Authorization: `BEARER ${this.props.token}`
+      }
+    })
+      .then(res => res.json())
+      .then(user => this.setState({ user }));
+  }
+
   render() {
+    const { first_name } = this.state.user;
     let link = { textDecoration: "none" };
 
     return (
       <div>
+        <div>
+          <h1>{first_name}</h1>
+        </div>
+        <br style={{ lineHeight: "1rem" }} />
+
         <Link to={`/service/oil-change`} style={link}>
           <span id="oil_change" value="Oil Change">
             Oil Change

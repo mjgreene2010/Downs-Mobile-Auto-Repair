@@ -5,25 +5,27 @@ export default class SignUp extends Component {
   state = { first_name: "", last_name: "", username: "", password: "" };
 
   handleSignUp = () => {
-    fetch("http://localhost:3000/api/v1/users", {
+    fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
+        // Authorization: `BEARER ${this.props.token}`
       },
       body: JSON.stringify({
-        user: {
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
-          username: this.state.username,
-          password: this.state.password
-        }
+        // user: {
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        username: this.state.username,
+        password: this.state.password
+        // }
       })
     })
       .then(res => res.json())
       .then((first_name, last_name, username, password) =>
         this.setState({ first_name, last_name, username, password })
-      );
+      )
+      .then(console.log);
   };
 
   handleChange = e => {
@@ -50,7 +52,7 @@ export default class SignUp extends Component {
         <div>
           <label htmlFor="lastName">Last Name: </label>
           <input
-            className="lastName"
+            className="last_name"
             type="text"
             placeholder="Enter Last Name"
             value={this.state.last_name}

@@ -1,8 +1,63 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import DropdownDate from "react-dropdown-date";
 
 export default class Service extends Component {
+  state = {
+    requested_date: "",
+    requested_time_earliest: "",
+    requested_time_latest: "",
+    details: ""
+  };
+
+  handleChange = e => {
+    // if (
+    //   e.target.className === "details" ||
+    //   e.target.className === "requested_date"
+    // ) {
+    //   this.setState({ [e.target.className]: e.target.value });
+    // } else {
+    //   let data = new Date(e.target.value).toLocaleTimeString("en-US");
+    //   this.setState({
+    //     [e.target.className]: data
+    //   });
+    // }
+
+    this.setState({ [e.target.className]: e.target.value });
+  };
+
+  handleServiceSubmit = () => {
+    const {
+      requested_date,
+      requested_time_earliestDate,
+      requested_time_latest,
+      details
+    } = this.state;
+
+    // const data = (this.state.requested_date,
+    // this.state.requested_time_earliest,
+    // this.state.requested_time_latest,
+    // this.state.detals);
+
+    fetch("http://localhost:3000/services", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `BEARER ${this.props.token}`
+      },
+      body: JSON.stringify({
+        requested_date,
+        requested_time_earliestDate,
+        requested_time_latest,
+        details
+      })
+
+      // requested_date: {},
+      // requested_time_earliest: {},
+      // requested_time_latest: {},
+    });
+  };
+
   render() {
     let title;
     switch (this.props.match.params.id) {
@@ -32,27 +87,61 @@ export default class Service extends Component {
         break;
       case "other":
         title = "Other";
+        break;
+      default:
+        return "";
     }
+
+    const {
+      requested_date,
+      requested_time_earliest,
+      requested_time_latest,
+      details
+    } = this.state;
     return (
       <div>
         <div>
           <div style={{ fontSize: "25px" }}>{title} </div>
           <div style={{ marginTop: "10px" }}>
             <label>
-              Requested Date: <input type="date" />
+              Requested Date:{" "}
+              <input
+                type="date"
+                className="requested_date"
+                value={requested_date}
+                onChange={this.handleChange}
+              />
             </label>
             <br style={{ lineHeight: "2rem" }} />
             <label>
-              Requested Time Frame: <input type="time" /> to{" "}
-              <input type="time" />
+              Requested Time Frame:{" "}
+              <input
+                type="time"
+                className="requested_time_earliest"
+                value={requested_time_earliest}
+                onChange={this.handleChange}
+              />{" "}
+              to{" "}
+              <input
+                type="time"
+                className="requested_time_latest"
+                value={requested_time_latest}
+                onChange={this.handleChange}
+              />
             </label>
             <br style={{ lineHeight: "2rem" }} />
             <label>
-              Detailed Notes: <textarea />
+              Detailed Notes:{" "}
+              <textarea
+                className="details"
+                value={details}
+                placeholder="What type of service are you requesting?"
+                onChange={this.handleChange}
+              />
             </label>
             <br style={{ lineHeight: "2rem" }} />
           </div>
-          <input type="submit" />
+          <input type="submit" onClick={() => this.handleServiceSubmit()} />
         </div>
         <br style={{ lineHeight: "2rem" }} />
         <button>
