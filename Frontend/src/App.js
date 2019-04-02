@@ -11,7 +11,6 @@ import Admin from "./Components/Admin";
 import About from "./Components/About";
 import Orders from "./Components/Order";
 // import * as serviceWorker from "./serviceWorker";
-
 let user;
 try {
   user = JSON.parse(localStorage.getItem("user"));
@@ -23,34 +22,29 @@ export default class App extends Component {
   state = {
     token: localStorage.getItem("token"),
     user: user || {},
-    user_id: localStorage.getItem("user_id"),
-    first_name: localStorage.getItem("first_name"),
+
     isLoggedIn: false
   };
 
   setCurrentUser = (token, user) => {
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("user_id", user.id);
-    localStorage.setItem("first_name", user.first_name);
+
     this.setState({
       token,
-      user,
-      user_id: localStorage.getItem("user_id"),
-      first_name: localStorage.getItem("first_name")
+      user
     });
   };
 
   isLoggedIn = () => {
-    this.setState({ isLoggedIn: true });
-  };
-
-  fullName = () => {
-    this.state.first_name.join(this.state.last_name);
+    if (this.state.token === null) {
+      return this.setState({ isLoggedIn: false });
+    } else {
+      return this.setState({ isLoggedIn: true });
+    }
   };
 
   render() {
-    console.log(this.state.user);
     return this.state.user.admin === true ? (
       <div>
         <div
@@ -74,13 +68,17 @@ export default class App extends Component {
               render={props => (
                 <PreHome
                   {...props}
-                  currentName={this.state.first_name}
+                  currentName={this.state.user.first_name}
                   token={this.state.token}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
               )}
             />
 
-            <Nav user_id={this.state.user_id} user={this.state.user.admin} />
+            <Nav
+              user_id={this.state.user.user_id}
+              user={this.state.user.admin}
+            />
 
             <Route
               path="/users/:id"
@@ -107,7 +105,13 @@ export default class App extends Component {
             <Route
               exact
               path="/admin"
-              render={props => <Admin {...props} token={this.state.token} />}
+              render={props => (
+                <Admin
+                  {...props}
+                  token={this.state.token}
+                  user={this.state.user}
+                />
+              )}
             />
 
             <Route exact path="/about" component={About} />
@@ -143,13 +147,13 @@ export default class App extends Component {
               render={props => (
                 <PreHome
                   {...props}
-                  currentName={this.state.first_name}
+                  currentName={this.state.user.first_name}
                   token={this.state.token}
                 />
               )}
             />
 
-            <Nav user_id={this.state.user_id} />
+            <Nav user_id={this.state.user.id} />
             <Route
               path="/users/:id"
               component={props => <Home {...props} token={this.state.token} />}
@@ -169,7 +173,13 @@ export default class App extends Component {
             <Route
               exact
               path="/service/:id"
-              render={props => <Service {...props} token={this.state.token} />}
+              render={props => (
+                <Service
+                  {...props}
+                  token={this.state.token}
+                  user={this.state.user}
+                />
+              )}
             />
 
             <Route exact path="/about" component={About} />

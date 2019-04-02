@@ -28,7 +28,7 @@ export default class Service extends Component {
   handleServiceSubmit = () => {
     const {
       requested_date,
-      requested_time_earliestDate,
+      requested_time_earliest,
       requested_time_latest,
       details
     } = this.state;
@@ -47,7 +47,7 @@ export default class Service extends Component {
       },
       body: JSON.stringify({
         requested_date,
-        requested_time_earliestDate,
+        requested_time_earliest,
         requested_time_latest,
         details
       })
@@ -141,11 +141,19 @@ export default class Service extends Component {
             </label>
             <br style={{ lineHeight: "2rem" }} />
           </div>
-          <input type="submit" onClick={() => this.handleServiceSubmit()} />
+          <Link
+            to={`/users/${this.props.user.id}`}
+            style={{ color: "black", textDecoration: "none" }}
+          >
+            <input type="submit" onClick={() => this.handleServiceSubmit()} />
+          </Link>
         </div>
         <br style={{ lineHeight: "2rem" }} />
         <button>
-          <Link to={"/"} style={{ color: "black", textDecoration: "none" }}>
+          <Link
+            to={`/users/${this.props.user.id}`}
+            style={{ color: "black", textDecoration: "none" }}
+          >
             Back
           </Link>
         </button>

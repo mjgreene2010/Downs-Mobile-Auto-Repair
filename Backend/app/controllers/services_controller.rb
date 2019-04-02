@@ -1,5 +1,7 @@
 class ServicesController < ApplicationController
 
+before_action :define_selected_service
+
     def index
         # @users = User.all
         render json: Service.all, methods: [ :user ]
@@ -34,7 +36,9 @@ class ServicesController < ApplicationController
       render json: current_service
     end
 
-    
+    # @dishes= Dish.find(params[:id]).destroy
+    #     # dishes.destroy
+    #     render json: @dishes
 
     def service_params
         params.permit(:requested_date,
@@ -46,7 +50,7 @@ class ServicesController < ApplicationController
         
       def define_selected_service
          if params[:id]
-           @current_service.find(params[:id])
+          @current_service = Service.find(params[:id])
          else
            @current_service = Service.new
          end

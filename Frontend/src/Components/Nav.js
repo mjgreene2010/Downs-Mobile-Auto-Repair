@@ -8,9 +8,7 @@ export default class Nav extends Component {
       color: "black",
       display: "inline-block"
     };
-    console.log(this.props.user);
     return this.props.user === true ? (
-      // return (
       <div>
         <br style={{ lineHeight: "3rem" }} />
         <div style={{ width: "100%" }}>

@@ -10,7 +10,7 @@ export default class Admin extends Component {
     modalOpen: false
   };
 
-  componentDidMount = () => {
+  allOrders = () => {
     fetch("http://localhost:3000/services", {
       headers: {
         Authorization: `Bearer ${localStorage.token}`
@@ -18,6 +18,30 @@ export default class Admin extends Component {
     })
       .then(res => res.json())
       .then(orderData => this.setState({ orderData }));
+  };
+
+  componentDidMount = () => {
+    this.allOrders();
+  };
+
+  deleteOrder = (id, e) => {
+    const orders = Object.assign([], this.state.orderData);
+    // orders.map(order => {
+    // console.log("this is order", order.id);
+    orders.splice(orders.id, 1);
+    this.setState({ orders });
+
+    fetch(`http://localhost:3000/services/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`
+      }
+    })
+      .then(res => res.json())
+      .catch(err => err => {
+        return err;
+      })
+      .then(res => this.allOrders());
   };
 
   openModal = () => {
@@ -44,6 +68,8 @@ export default class Admin extends Component {
         // transform: "translate(-50%, -50%)"
       }
     };
+
+    console.log(this.state.orderData);
     return (
       <div>
         <h1>Order Requests</h1>
@@ -57,6 +83,7 @@ export default class Admin extends Component {
                 <th>Go To Order </th>
               </tr>
               {this.state.orderData.map(data => {
+                console.log(data);
                 var a = new Date(data.requested_time_earliest);
                 var b = new Date(data.requested_time_latest);
                 return (
@@ -108,6 +135,9 @@ export default class Admin extends Component {
                           </form>
                         </div>
                       </Modal>
+                      <button onClick={() => this.deleteOrder(data.id)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );
