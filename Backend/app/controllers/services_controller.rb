@@ -44,7 +44,7 @@ before_action :define_selected_service
         params.permit(:requested_date,
         :requested_time_earliest,
         :requested_time_latest,
-        :details,
+        :details, :decision
         )
       end
         

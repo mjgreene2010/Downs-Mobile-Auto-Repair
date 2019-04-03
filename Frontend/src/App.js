@@ -118,7 +118,13 @@ export default class App extends Component {
             <Route
               exact
               path="/orders"
-              render={props => <Orders {...props} token={this.state.token} />}
+              render={props => (
+                <Orders
+                  {...props}
+                  token={this.state.token}
+                  user={this.state.user.id}
+                />
+              )}
             />
           </React.Fragment>
         </Router>
@@ -186,7 +192,13 @@ export default class App extends Component {
             <Route
               exact
               path="/orders"
-              render={props => <Orders {...props} token={this.state.token} />}
+              render={props => (
+                <Orders
+                  {...props}
+                  user={this.state.user.id}
+                  token={this.state.token}
+                />
+              )}
             />
           </React.Fragment>
         </Router>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Modals from "./Modals";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
@@ -7,7 +7,8 @@ Modal.setAppElement("#root");
 export default class Admin extends Component {
   state = {
     orderData: [],
-    modalOpen: false
+    modalOpen: false,
+    decision: null
   };
 
   allOrders = () => {
@@ -23,6 +24,43 @@ export default class Admin extends Component {
   componentDidMount = () => {
     this.allOrders();
   };
+
+  acceptOrder = id => {
+    console.log(this.state.decision);
+    return (
+      this.setState({ decision: true }),
+      fetch(`http://localhost:3000/services/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `BEARER ${this.props.token}`
+        },
+        body: JSON.stringify({
+          decision: true
+        })
+      }).then(this.allOrders())
+    );
+  };
+
+  declineOrder = id => {
+    return (
+      this.setState({ decision: false }),
+      fetch(`http://localhost:3000/services/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `BEARER ${this.props.token}`
+        },
+        body: JSON.stringify({
+          decision: false
+        })
+      })
+    );
+  };
+
+  // return {(decision === true) ? "Accept" ? "Decline"}}
 
   deleteOrder = (id, e) => {
     const orders = Object.assign([], this.state.orderData);
@@ -44,6 +82,16 @@ export default class Admin extends Component {
       .then(res => this.allOrders());
   };
 
+  renderOrderStatus = order => {
+    if (order.decision === true) {
+      return "Accept";
+    } else if (order.decision === false) {
+      return "Decline";
+    } else {
+      return "n/a";
+    }
+  };
+
   openModal = () => {
     this.setState({ modalOpen: true });
   };
@@ -57,19 +105,19 @@ export default class Admin extends Component {
   };
 
   render() {
-    const modalStyles = {
-      content: {
-        top: "50%",
-        left: "50%",
-        right: "auto",
-        bottom: "auto",
-        backgroundColor: "gray",
-        marginRight: "-50%"
-        // transform: "translate(-50%, -50%)"
-      }
-    };
-
-    console.log(this.state.orderData);
+    // const modalStyles = {
+    //   content: {
+    //     top: "50%",
+    //     left: "50%",
+    //     right: "auto",
+    //     bottom: "auto",
+    //     backgroundColor: "gray",
+    //     marginRight: "-50%"
+    //     // transform: "translate(-50%, -50%)"
+    //   }
+    // };
+    console.log("this is order data", this.state.orderData);
+    // console.log("child", this.state.orderData.decision);
     return (
       <div>
         <h1>Order Requests</h1>
@@ -82,60 +130,29 @@ export default class Admin extends Component {
                 <th>Accept/Decline</th>
                 <th>Go To Order </th>
               </tr>
-              {this.state.orderData.map(data => {
-                console.log(data);
-                var a = new Date(data.requested_time_earliest);
-                var b = new Date(data.requested_time_latest);
+              {this.state.orderData.map(order => {
+                console.log("this is order in the map", order);
+                // var a = new Date(order.requested_time_earliest);
+                // var b = new Date(order.requested_time_latest);
                 return (
-                  <tr key={data.id}>
+                  <tr key={order.id}>
                     <td>
-                      {data.user.first_name} {data.user.last_name}
+                      {order.id}
+                      {order.user.first_name} {order.user.last_name}
                     </td>
-                    <td>Fixmy car</td>
-                    <td />
+                    <td>Fix my car</td>
+                    <td>{this.renderOrderStatus(order)}</td>
                     <td>
                       <button onClick={this.openModal}>Open</button>
-                      <Modal
-                        className="modal"
+                      <Modals
+                        data={order}
                         isOpen={this.state.modalOpen}
                         onAfterOpen={this.whenModalIsOpen}
                         onRequestClose={this.closeModal}
-                        style={modalStyles}
-                      >
-                        <h2 ref={subtitle => (this.subtitle = subtitle)}>
-                          Order Details{" "}
-                          <button onClick={this.closeModal}>x</button>
-                        </h2>
-                        <div>
-                          <form>
-                            <p>
-                              <label>
-                                Name: {data.user.first_name}{" "}
-                                {data.user.last_name}
-                              </label>
-                            </p>
-
-                            <p>
-                              <label>
-                                Requested Date: {data.requested_date}
-                              </label>
-                              <br />
-                              <label>
-                                Requested Time: {a.getUTCHours()}:
-                                {a.getUTCMinutes()} to {b.getUTCHours()}:
-                                {b.getUTCMinutes()}
-                                {/* {data.requested_time_latest} */}
-                              </label>
-                              <br />
-                              <label>Details: {data.details}</label>
-                              <br />
-                            </p>
-                            <button>Accept</button>
-                            <button>Decline</button>
-                          </form>
-                        </div>
-                      </Modal>
-                      <button onClick={() => this.deleteOrder(data.id)}>
+                        acceptOrder={this.acceptOrder}
+                        declineOrder={this.declineOrder}
+                      />
+                      <button onClick={() => this.deleteOrder(order.id)}>
                         Delete
                       </button>
                     </td>

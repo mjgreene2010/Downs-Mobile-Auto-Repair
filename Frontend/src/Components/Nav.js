@@ -33,7 +33,7 @@ export default class Nav extends Component {
             About
           </NavLink>{" "}
           <NavLink
-            to="/order"
+            to="/orders"
             exact
             style={link}
             activeStyle={{
@@ -80,7 +80,7 @@ export default class Nav extends Component {
             About
           </NavLink>{" "}
           <NavLink
-            to="/order"
+            to="/orders"
             exact
             style={link}
             activeStyle={{
