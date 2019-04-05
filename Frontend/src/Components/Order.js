@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Table } from "semantic-ui-react";
+// import Button from "boostrap";
 
 export default class Order extends Component {
   state = {
@@ -40,7 +42,7 @@ export default class Order extends Component {
   };
 
   renderOrderStatus = () => {
-    let orderStatus = Object.assign(...this.state.myOrders);
+    let orderStatus = { ...this.state.myOrders };
     if (orderStatus.decision === true) {
       return "Accept";
     } else if (orderStatus.decision === false) {
@@ -60,44 +62,45 @@ export default class Order extends Component {
       <div>
         <div>
           <h1>Orders</h1>
-          <table>
-            <tbody>
-              <tr>
-                <th>Request </th>
-                <th>Request Date </th>
-                <th>Request Time</th>
-                <th>Details </th>
+          <Table celled class="ui celled table">
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Request </Table.HeaderCell>
+                <Table.HeaderCell>Request Date </Table.HeaderCell>
+                <Table.HeaderCell>Request Time</Table.HeaderCell>
+                <Table.HeaderCell>Details </Table.HeaderCell>
 
-                <th>Accept/Decline</th>
-                <th>Delete</th>
-              </tr>
-
+                <Table.HeaderCell>Accept/Decline</Table.HeaderCell>
+                <Table.HeaderCell>Delete</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
               {filteredOrders.map(data => {
                 var a = new Date(data.requested_time_earliest);
                 var b = new Date(data.requested_time_latest);
 
                 return (
-                  <tr key={data.id}>
-                    <td>Fixmy car</td>
-                    <td>{data.requested_date}</td>
-                    <td>
+                  <Table.Row key={data.id}>
+                    <Table.Cell>Fixmy car</Table.Cell>
+                    <Table.Cell>{data.requested_date}</Table.Cell>
+                    <Table.Cell>
                       {a.getUTCHours()}:{a.getUTCMinutes()} to {b.getUTCHours()}
                       :{b.getUTCMinutes()}
-                    </td>
+                    </Table.Cell>
 
-                    <td>{data.details}</td>
-                    <td>{this.renderOrderStatus()}</td>
-                    <td>
+                    <Table.Cell>{data.details}</Table.Cell>
+                    <Table.Cell>{this.renderOrderStatus()}</Table.Cell>
+                    <Table.Cell>
                       {" "}
                       <button onClick={() => this.deleteOrder(data.id)}>
                         Delete
                       </button>
-                    </td>
-                  </tr>
+                    </Table.Cell>
+                  </Table.Row>
                 );
               })}
-            </tbody>
-          </table>
+            </Table.Body>
+          </Table>
         </div>
       </div>
     );

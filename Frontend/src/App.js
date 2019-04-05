@@ -10,6 +10,7 @@ import Service from "./Components/Service";
 import Admin from "./Components/Admin";
 import About from "./Components/About";
 import Orders from "./Components/Order";
+import "./App.css";
 // import * as serviceWorker from "./serviceWorker";
 let user;
 try {
@@ -46,17 +47,9 @@ export default class App extends Component {
 
   render() {
     return this.state.user.admin === true ? (
-      <div>
-        <div
-          className="App"
-          style={{
-            fontSize: "50px",
-            float: "left",
-            width: "88%"
-          }}
-        >
-          Down's Mobile Auto Repair
-        </div>
+      <div style={{}}>
+        <hr />
+        <div className="header">Down's Mobile Auto Repair</div>
         {/* <span style={{ float: "right" }}> {first_name} </span> */}
         <br />
 
@@ -131,17 +124,20 @@ export default class App extends Component {
       </div>
     ) : (
       // );
-      <div>
-        <div
-          className="App"
-          style={{
-            fontSize: "50px",
-            float: "left",
-            width: "88%"
-          }}
-        >
-          Down's Mobile Auto Repair
-        </div>
+      <div
+        name="app"
+        style={
+          {
+            // backgroundColor: "orange",
+            // backgroudSize: "cover",
+            // height: "100%",
+            // width: "100%",
+            // overflow: "hidden"
+          }
+        }
+      >
+        <hr />
+        <div className="header">Down's Mobile Auto Repair</div>
         {/* <span style={{ float: "right" }}> {first_name} </span> */}
         <br />
 

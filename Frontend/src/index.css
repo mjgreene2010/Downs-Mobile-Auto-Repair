@@ -1,3 +1,6 @@
+html {
+  background-color: orange;
+}
 body {
   margin: 0;
   padding: 0;
@@ -11,4 +14,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.App {
+  background-color: orange;
+  height: 100%;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
 }

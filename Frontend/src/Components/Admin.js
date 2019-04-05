@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Modals from "./Modals";
-import Modal from "react-modal";
+// import Modal from "react-modal";
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 
 export default class Admin extends Component {
   state = {
@@ -26,7 +26,7 @@ export default class Admin extends Component {
   };
 
   acceptOrder = id => {
-    console.log(this.state.decision);
+    // console.log(this.state.decision);
     return (
       this.setState({ decision: true }),
       fetch(`http://localhost:3000/services/${id}`, {
@@ -39,7 +39,7 @@ export default class Admin extends Component {
         body: JSON.stringify({
           decision: true
         })
-      }).then(this.allOrders())
+      }).then(() => this.allOrders())
     );
   };
 
@@ -56,7 +56,7 @@ export default class Admin extends Component {
         body: JSON.stringify({
           decision: false
         })
-      })
+      }).then(() => this.allOrders())
     );
   };
 
@@ -79,24 +79,25 @@ export default class Admin extends Component {
       .catch(err => err => {
         return err;
       })
-      .then(res => this.allOrders());
+      .then(() => this.allOrders());
   };
 
   renderOrderStatus = order => {
-    if (order.decision === true) {
+    // console.log(order);
+    if (order === true) {
       return "Accept";
-    } else if (order.decision === false) {
+    } else if (order === false) {
       return "Decline";
     } else {
       return "n/a";
     }
   };
 
-  openModal = () => {
+  openModal = id => {
     this.setState({ modalOpen: true });
   };
 
-  whenModalIsOpen = () => {
+  afterOpenModel = () => {
     this.subtitle.style.color = "#f00";
   };
 
@@ -105,18 +106,8 @@ export default class Admin extends Component {
   };
 
   render() {
-    // const modalStyles = {
-    //   content: {
-    //     top: "50%",
-    //     left: "50%",
-    //     right: "auto",
-    //     bottom: "auto",
-    //     backgroundColor: "gray",
-    //     marginRight: "-50%"
-    //     // transform: "translate(-50%, -50%)"
-    //   }
-    // };
-    console.log("this is order data", this.state.orderData);
+    console.log(this.state.modalOpen);
+    // console.log("this is order data", this.state.orderData);
     // console.log("child", this.state.orderData.decision);
     return (
       <div>
@@ -131,27 +122,30 @@ export default class Admin extends Component {
                 <th>Go To Order </th>
               </tr>
               {this.state.orderData.map(order => {
-                console.log("this is order in the map", order);
+                // console.log("this is order in the map", order);
                 // var a = new Date(order.requested_time_earliest);
                 // var b = new Date(order.requested_time_latest);
                 return (
                   <tr key={order.id}>
                     <td>
-                      {order.id}
                       {order.user.first_name} {order.user.last_name}
                     </td>
                     <td>Fix my car</td>
-                    <td>{this.renderOrderStatus(order)}</td>
+                    <td>{this.renderOrderStatus(order.decision)}</td>
                     <td>
-                      <button onClick={this.openModal}>Open</button>
-                      <Modals
-                        data={order}
-                        isOpen={this.state.modalOpen}
-                        onAfterOpen={this.whenModalIsOpen}
-                        onRequestClose={this.closeModal}
-                        acceptOrder={this.acceptOrder}
-                        declineOrder={this.declineOrder}
-                      />
+                      {this.state.modalOpen === true && (
+                        <Modals
+                          data={order}
+                          isOpen={this.state.modalOpen}
+                          onAfterOpen={this.afterOpenModal}
+                          onRequestClose={this.closeModal}
+                          acceptOrder={this.acceptOrder}
+                          declineOrder={this.declineOrder}
+                        />
+                      )}
+                      <button onClick={() => this.openModal(order.id)}>
+                        Open
+                      </button>
                       <button onClick={() => this.deleteOrder(order.id)}>
                         Delete
                       </button>

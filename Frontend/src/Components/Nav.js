@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import "./Nav.css";
 
 export default class Nav extends Component {
   render() {
@@ -9,15 +10,18 @@ export default class Nav extends Component {
       display: "inline-block"
     };
     return this.props.user === true ? (
-      <div>
+      <div className="nav">
         <br style={{ lineHeight: "3rem" }} />
-        <div style={{ width: "100%" }}>
+        <div
+          style={{ width: "100%", borderTop: "2px", borderTopColor: "gray" }}
+        >
+          <hr />
           <NavLink
             to={`/users/${this.props.user_id}`}
             exact
             style={link}
             activeStyle={{
-              background: "brown"
+              background: "gray"
             }}
           >
             Home
@@ -27,7 +31,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "brown"
+              background: "gray"
             }}
           >
             About
@@ -37,7 +41,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "brown"
+              background: "gray"
             }}
           >
             Orders
@@ -47,7 +51,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "brown"
+              background: "gray"
             }}
           >
             Admin
@@ -64,7 +68,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "brown"
+              background: "gray"
             }}
           >
             Home
@@ -74,7 +78,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "brown"
+              background: "gray"
             }}
           >
             About
@@ -84,11 +88,12 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "brown"
+              background: "gray"
             }}
           >
             Orders
           </NavLink>{" "}
+          <hr />
         </div>
       </div>
     );

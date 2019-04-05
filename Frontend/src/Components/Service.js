@@ -100,7 +100,7 @@ export default class Service extends Component {
     } = this.state;
     return (
       <div>
-        <div>
+        <div className="ui eight wide column">
           <div style={{ fontSize: "25px" }}>{title} </div>
           <div style={{ marginTop: "10px" }}>
             <label>

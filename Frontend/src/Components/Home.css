@@ -1,0 +1,16 @@
+/* .card {
+  background-color: lightgrey;
+  width: 300px;
+  border: 25px solid green;
+  padding: 25px;
+  margin: 35px;
+} */
+
+.cardheader {
+  background-color: lightgrey;
+  width: 100%;
+  border: 25px;
+  border-color: solid green;
+  padding: 25px;
+  margin: 25px;
+}

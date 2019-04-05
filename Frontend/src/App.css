@@ -1,5 +1,20 @@
+@import url("https://fonts.googleapis.com/css?family=Anton");
+
 .App {
   text-align: center;
+}
+
+.header {
+  font-size: 50px;
+  float: left;
+  width: 88%;
+  /* border: solid #000; */
+  border-width: 0 1px;
+  border-bottom: solid #000;
+  border-bottom-color: gray;
+  font-family: "Anton", sans-serif;
+
+  color: red;
 }
 
 .App-logo {
@@ -21,6 +36,28 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.cardheader {
+  background-color: lightgrey;
+  width: 100%;
+  border: 25px;
+  padding: 25px;
+  margin: 25px;
+  outline: gray dotted thick;
+  /* opacity: 10; */
+}
+
+.currentUser {
+  font-family: "Anton", sans-serif;
+  color: gray;
+  margin: 25px;
+  font-size: 30px;
+  text-shadow: 2px 2px 0 #000, 2px 2px 0 #000, 2px 2px 0 #000, 2px 2px 0 #000;
+}
+
+.header {
+  text-shadow: 2px 2px 0 #000, 2px 2px 0 #000, 2px 2px 0 #000, 2px 2px 0 #000;
 }
 
 @keyframes App-logo-spin {

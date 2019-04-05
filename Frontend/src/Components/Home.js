@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Card } from "semantic-ui-react";
 
 export default class Home extends Component {
   state = {
@@ -18,68 +19,116 @@ export default class Home extends Component {
 
   render() {
     const { first_name } = this.state.user;
-    let link = { textDecoration: "none" };
+    let link = { color: "gray", textDecoration: "none" };
+
+    const { styling } = {
+      backgroundColor: "lightgrey",
+      width: "100%",
+      border: "25px",
+      borderColor: "solid green",
+      padding: "25px",
+      margin: "25px"
+    };
 
     return (
       <div>
-        <div>
+        <div className="currentUser">
           <h1>{first_name}</h1>
         </div>
         <br style={{ lineHeight: "1rem" }} />
+        <Card>
+          <Card.Content className="card">
+            <Link to={`/service/oil-change`} style={link}>
+              <span id="oil_change" value="Oil Change">
+                <Card.Header className="cardheader">Oil Change</Card.Header>
+              </span>
+            </Link>
+          </Card.Content>
+        </Card>
+        <br style={{ lineHeight: "2rem" }} />
+        <Card className="card">
+          <Card.Content>
+            {/* <Card.Header>Brakes</Card.Header> */}
+            <Link to={`/service/brakes`}>
+              <span id="brakes" value="Brakes">
+                <Card.Header className="cardheader">Brakes</Card.Header>
+              </span>
+            </Link>
+          </Card.Content>
+        </Card>
+        <br style={{ lineHeight: "2rem" }} />
+        <Card>
+          <Card.Content className="card">
+            <Link to={"/service/tune-ups"} style={link}>
+              <span id="tune_ups" value="Tune Ups">
+                <Card.Header className="cardheader">Tune-ups</Card.Header>
+              </span>
+            </Link>
+          </Card.Content>
+        </Card>
+        <br style={{ lineHeight: "2rem" }} />
+        <Card>
+          <Card.Content className="card">
+            <Link to={"/service/starters"} style={link}>
+              <span id="starters" value="Starters">
+                <Card.Header className="cardheader">Starters</Card.Header>
+              </span>
+            </Link>
+          </Card.Content>
+        </Card>
+        <br style={{ lineHeight: "2rem" }} />
+        <Card>
+          <Card.Content className="card">
+            <Link to={"/service/alternators"} style={link}>
+              <span id="alternators" value="Alternators">
+                <Card.Header className="cardheader">Alternators</Card.Header>
+              </span>
+            </Link>
+          </Card.Content>
+        </Card>
+        <br style={{ lineHeight: "2rem" }} />
+        <Card>
+          <Card.Content className="card">
+            <Link to={"/service/batteries"} style={link}>
+              <span id="batteries" value="Batteries">
+                <Card.Header className="cardheader">Batteries</Card.Header>
+              </span>
+            </Link>
+          </Card.Content>
+        </Card>
+        <br style={{ lineHeight: "2rem" }} />
+        <Card>
+          <Card.Content className="card">
+            <Link to={"/service/tire-repair"} style={link}>
+              <span id="tire_repair" value="Tire Repair">
+                <Card.Header className="cardheader">Tire Repairs</Card.Header>
+              </span>
+            </Link>
+          </Card.Content>
+        </Card>
+        <br style={{ lineHeight: "2rem" }} />
+        <Card>
+          <Card.Content className="card">
+            <Link to={"/service/power-steering"} style={link}>
+              <span id="power_steering" value="Power Steering">
+                <Card.Header className="cardheader">Power Steering</Card.Header>
+              </span>
+            </Link>
+          </Card.Content>
+        </Card>
 
-        <Link to={`/service/oil-change`} style={link}>
-          <span id="oil_change" value="Oil Change">
-            Oil Change
-          </span>
-        </Link>
         <br style={{ lineHeight: "2rem" }} />
-        <Link to={`/service/brakes`} style={link}>
-          <span id="brakes" value="Brakes">
-            Brakes
-          </span>
-        </Link>
-        <br style={{ lineHeight: "2rem" }} />
-        <Link to={"/service/tune-ups"} style={link}>
-          <span id="tune_ups" value="Tune Ups">
-            Tune-Ups
-          </span>
-        </Link>
-        <br style={{ lineHeight: "2rem" }} />
-        <Link to={"/service/starters"} style={link}>
-          <span id="starters" value="Starters">
-            Starters
-          </span>
-        </Link>
-        <br style={{ lineHeight: "2rem" }} />
-        <Link to={"/service/alternators"} style={link}>
-          <span id="alternators" value="Alternators">
-            Alternators
-          </span>
-        </Link>
-        <br style={{ lineHeight: "2rem" }} />
-        <Link to={"/service/batteries"} style={link}>
-          <span id="batteries" value="Batteries">
-            Batteries
-          </span>
-        </Link>
-        <br style={{ lineHeight: "2rem" }} />
-        <Link to={"/service/tire-repair"} style={link}>
-          <span id="tire_repair" value="Tire Repair">
-            Tire Repair
-          </span>
-        </Link>
-        <br style={{ lineHeight: "2rem" }} />
-        <Link to={"/service/power-steering"} style={link}>
-          <span id="power_steering" value="Power Steering">
-            Power Steering
-          </span>
-        </Link>
-        <br style={{ lineHeight: "2rem" }} />
-        <Link to={"/service/other"} style={link}>
-          <span id="other" value="Other">
-            Other
-          </span>
-        </Link>
+        <Card>
+          <Card.Content className="card">
+            <Link to={"/service/other"} style={link}>
+              <span id="other" value="Other">
+                <Card.Header className="cardheader">
+                  <Card.Meta>Other</Card.Meta>
+                </Card.Header>
+              </span>
+            </Link>
+          </Card.Content>
+        </Card>
       </div>
     );
   }

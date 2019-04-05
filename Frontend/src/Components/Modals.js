@@ -1,9 +1,25 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
 
+const modalStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    backgroundColor: "gray",
+    marginRight: "-50%"
+    // transform: "translate(-50%, -50%)"
+  }
+};
+
 Modal.setAppElement("#root");
 
 export default class Modals extends Component {
+  whenModalIsOpen = () => {
+    this.subtitle.style.color = "#f00";
+  };
+
   render() {
     const modalStyles = {
       content: {
@@ -17,17 +33,15 @@ export default class Modals extends Component {
       }
     };
     let data = this.props.data;
-    console.log(data);
+    // console.log(data);
     // let data = Object.assign(...this.props.data);
     let a = new Date(data.requested_time_earliest);
     let b = new Date(data.requested_time_latest);
     return (
-      <div style={modalStyles}>
+      <div style={modalStyles} onClick={this.props.onAfterOpen}>
         <h2 ref={subtitle => (this.subtitle = subtitle)}>
           Order Details{" "}
-          <button type="button" onClick={this.closeModal}>
-            x
-          </button>
+          <button onClick={() => this.props.onRequestClose()}>x</button>
         </h2>
         <div>
           <form>
