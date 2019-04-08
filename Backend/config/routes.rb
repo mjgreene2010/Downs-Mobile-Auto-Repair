@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_profiles
   resources :services
   resources :users
   resource :auth, only: [:create]
