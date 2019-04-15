@@ -47,12 +47,12 @@ export default class App extends Component {
 
   render() {
     return this.state.user.admin === true ? (
-      <div style={{}}>
+      <div>
         <hr />
         <div className="header">Down's Mobile Auto Repair</div>
-        {/* <span style={{ float: "right" }}> {first_name} </span> */}
+        <hr />
+        <div className="header" />
         <br />
-
         <Router>
           <React.Fragment>
             <Route
@@ -68,10 +68,7 @@ export default class App extends Component {
               )}
             />
 
-            <Nav
-              user_id={this.state.user.user_id}
-              user={this.state.user.admin}
-            />
+            <Nav user_id={this.state.user.id} user={this.state.user.admin} />
 
             <Route
               path="/users/:id"
@@ -124,23 +121,14 @@ export default class App extends Component {
       </div>
     ) : (
       // );
-      <div
-        name="app"
-        style={
-          {
-            // backgroundColor: "orange",
-            // backgroudSize: "cover",
-            // height: "100%",
-            // width: "100%",
-            // overflow: "hidden"
-          }
-        }
-      >
+      <div>
         <hr />
         <div className="header">Down's Mobile Auto Repair</div>
+        <hr />
+        <div className="header" />
+
         {/* <span style={{ float: "right" }}> {first_name} </span> */}
         <br />
-
         <Router>
           <React.Fragment>
             <Route

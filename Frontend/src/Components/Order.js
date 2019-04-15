@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Table } from "semantic-ui-react";
-// import Button from "boostrap";
 
 export default class Order extends Component {
   state = {
@@ -23,8 +22,6 @@ export default class Order extends Component {
 
   deleteOrder = (id, e) => {
     const orders = Object.assign([], this.state.myOrders);
-    // orders.map(order => {
-    // console.log("this is order", order.id);
     orders.splice(orders.id, 1);
     this.setState({ orders });
 
@@ -41,11 +38,10 @@ export default class Order extends Component {
       .then(res => this.myOrders());
   };
 
-  renderOrderStatus = () => {
-    let orderStatus = { ...this.state.myOrders };
-    if (orderStatus.decision === true) {
+  renderOrderStatus = order => {
+    if (order === true) {
       return "Accept";
-    } else if (orderStatus.decision === false) {
+    } else if (order === false) {
       return "Decline";
     } else {
       return "pending";
@@ -53,7 +49,6 @@ export default class Order extends Component {
   };
 
   render() {
-    // console.log(this.state.myOrders);
     let filteredOrders = this.state.myOrders.filter(data => {
       return this.props.user === data.user_id;
     });
@@ -62,36 +57,60 @@ export default class Order extends Component {
       <div>
         <div>
           <h1>Orders</h1>
-          <Table celled class="ui celled table">
+          <Table celled>
             <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Request </Table.HeaderCell>
-                <Table.HeaderCell>Request Date </Table.HeaderCell>
-                <Table.HeaderCell>Request Time</Table.HeaderCell>
-                <Table.HeaderCell>Details </Table.HeaderCell>
-
-                <Table.HeaderCell>Accept/Decline</Table.HeaderCell>
-                <Table.HeaderCell>Delete</Table.HeaderCell>
+              <Table.Row className="table-header">
+                <Table.HeaderCell className="ui-celled-table">
+                  Request
+                </Table.HeaderCell>
+                <Table.HeaderCell className="ui-celled-table">
+                  Request Date
+                </Table.HeaderCell>
+                <Table.HeaderCell className="ui-celled-table">
+                  Request Time
+                </Table.HeaderCell>
+                <Table.HeaderCell className="ui-celled-table">
+                  Details
+                </Table.HeaderCell>
+                <Table.HeaderCell className="ui-celled-table">
+                  Accept/Decline
+                </Table.HeaderCell>
+                <Table.HeaderCell className="ui-celled-table">
+                  Delete
+                </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
               {filteredOrders.map(data => {
-                var a = new Date(data.requested_time_earliest);
-                var b = new Date(data.requested_time_latest);
+                let earliest = new Date(data.requested_time_earliest);
+                let latest = new Date(data.requested_time_latest);
+                let earliestHours = earliest.getHours();
+                let earliestMinutes = earliest.getMinutes();
+                let latestHours = latest.getHours();
+                let latestMinutes = latest.getMinutes();
+
+                earliestHours = ("0" + earliestHours).slice(-2);
+                earliestMinutes = ("0" + earliestMinutes).slice(-2);
+                latestHours = ("0" + latestHours).slice(-2);
+                latestMinutes = ("0" + latestMinutes).slice(-2);
 
                 return (
                   <Table.Row key={data.id}>
-                    <Table.Cell>Fixmy car</Table.Cell>
-                    <Table.Cell>{data.requested_date}</Table.Cell>
-                    <Table.Cell>
-                      {a.getUTCHours()}:{a.getUTCMinutes()} to {b.getUTCHours()}
-                      :{b.getUTCMinutes()}
+                    <Table.Cell className="tableCell">Fixmy car</Table.Cell>
+                    <Table.Cell className="tableCell">
+                      {data.requested_date}
                     </Table.Cell>
-
-                    <Table.Cell>{data.details}</Table.Cell>
-                    <Table.Cell>{this.renderOrderStatus()}</Table.Cell>
-                    <Table.Cell>
-                      {" "}
+                    <Table.Cell className="tableCell">
+                      {earliestHours}:{earliestMinutes} to {latestHours}:
+                      {latestMinutes}
+                    </Table.Cell>
+                    <Table.Cell className="tableCell">
+                      {data.details}
+                    </Table.Cell>
+                    <Table.Cell className="tableCell">
+                      {this.renderOrderStatus(data.decision)}
+                    </Table.Cell>
+                    <Table.Cell className="tableCell">
                       <button onClick={() => this.deleteOrder(data.id)}>
                         Delete
                       </button>

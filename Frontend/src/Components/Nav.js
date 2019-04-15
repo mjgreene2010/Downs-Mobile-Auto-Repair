@@ -7,7 +7,14 @@ export default class Nav extends Component {
     const link = {
       width: "50px",
       color: "black",
-      display: "inline-block"
+      display: "inline-block",
+      textDecoration: "none",
+      margin: "25px",
+      // backgroundColor: "red	",
+      border: "solid 3px",
+      marginTop: "1px",
+      borderRadius: "15px",
+      padding: "5px"
     };
     return this.props.user === true ? (
       <div className="nav">
@@ -15,13 +22,12 @@ export default class Nav extends Component {
         <div
           style={{ width: "100%", borderTop: "2px", borderTopColor: "gray" }}
         >
-          <hr />
           <NavLink
             to={`/users/${this.props.user_id}`}
             exact
             style={link}
             activeStyle={{
-              background: "gray"
+              background: "red"
             }}
           >
             Home
@@ -31,7 +37,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "gray"
+              background: "red"
             }}
           >
             About
@@ -41,7 +47,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "gray"
+              background: "red"
             }}
           >
             Orders
@@ -51,7 +57,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "gray"
+              background: "red"
             }}
           >
             Admin
@@ -60,7 +66,7 @@ export default class Nav extends Component {
       </div>
     ) : (
       // );
-      <div>
+      <div className="nav">
         <br style={{ lineHeight: "3rem" }} />
         <div style={{ width: "100%" }}>
           <NavLink
@@ -93,7 +99,6 @@ export default class Nav extends Component {
           >
             Orders
           </NavLink>{" "}
-          <hr />
         </div>
       </div>
     );

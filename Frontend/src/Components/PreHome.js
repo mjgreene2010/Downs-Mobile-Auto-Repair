@@ -11,9 +11,9 @@ export default class PreHome extends Component {
   render() {
     const first_name = this.props.currentName;
     return this.props.token === null || "" ? (
-      <div className="prehome">
-        <div style={{ float: "auto", width: "13%" }}>
-          <div style={{ float: "auto" }}>
+      <div>
+        <div className="prehome">
+          <div className="side1">
             <Link
               to={"/login"}
               style={{ textDecoration: "none", color: "black" }}
@@ -21,7 +21,7 @@ export default class PreHome extends Component {
               Login/
             </Link>
           </div>
-          <div>
+          <div className="side2">
             <Link
               to={"/signup"}
               style={{ textDecoration: "none", color: "black" }}
@@ -33,9 +33,9 @@ export default class PreHome extends Component {
         </div>
       </div>
     ) : (
-      <div>
-        <span style={{ float: "left" }}> {first_name} </span>/
-        <Link to="/users/null" style={{ float: "right" }} onClick={this.logOut}>
+      <div className="prehome">
+        <span style={{}}>{first_name}</span>/
+        <Link to="/users/null" style={{}} onClick={this.logOut}>
           Log out
         </Link>
       </div>

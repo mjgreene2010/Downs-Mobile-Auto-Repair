@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Modals from "./Modals";
+import OrderDetails from "./OrderDetails";
 // import Modal from "react-modal";
 
 // Modal.setAppElement("#root");
@@ -7,7 +7,6 @@ import Modals from "./Modals";
 export default class Admin extends Component {
   state = {
     orderData: [],
-    modalOpen: false,
     decision: null
   };
 
@@ -93,21 +92,7 @@ export default class Admin extends Component {
     }
   };
 
-  openModal = id => {
-    this.setState({ modalOpen: true });
-  };
-
-  afterOpenModel = () => {
-    this.subtitle.style.color = "#f00";
-  };
-
-  closeModal = () => {
-    this.setState({ modalOpen: false });
-  };
-
   render() {
-    console.log(this.state.modalOpen);
-    // console.log("this is order data", this.state.orderData);
     // console.log("child", this.state.orderData.decision);
     return (
       <div>
@@ -115,11 +100,11 @@ export default class Admin extends Component {
         <div>
           <table>
             <tbody>
-              <tr>
-                <th> Name </th>
-                <th>Request </th>
-                <th>Accept/Decline</th>
-                <th>Go To Order </th>
+              <tr className="table-header">
+                <th className="ui-celled-table"> Name </th>
+                <th className="ui-celled-table">Request </th>
+                <th className="ui-celled-table">Accept/Decline</th>
+                <th className="ui-celled-table">Go To Order </th>
               </tr>
               {this.state.orderData.map(order => {
                 // console.log("this is order in the map", order);
@@ -127,25 +112,15 @@ export default class Admin extends Component {
                 // var b = new Date(order.requested_time_latest);
                 return (
                   <tr key={order.id}>
-                    <td>
+                    <td className="tableCell">
                       {order.user.first_name} {order.user.last_name}
                     </td>
-                    <td>Fix my car</td>
-                    <td>{this.renderOrderStatus(order.decision)}</td>
-                    <td>
-                      {this.state.modalOpen === true && (
-                        <Modals
-                          data={order}
-                          isOpen={this.state.modalOpen}
-                          onAfterOpen={this.afterOpenModal}
-                          onRequestClose={this.closeModal}
-                          acceptOrder={this.acceptOrder}
-                          declineOrder={this.declineOrder}
-                        />
-                      )}
-                      <button onClick={() => this.openModal(order.id)}>
-                        Open
-                      </button>
+                    <td className="tableCell">Fix my car</td>
+                    <td className="tableCell">
+                      {this.renderOrderStatus(order.decision)}
+                    </td>
+                    <td className="tableCell">
+                      <OrderDetails data={order} />
                       <button onClick={() => this.deleteOrder(order.id)}>
                         Delete
                       </button>

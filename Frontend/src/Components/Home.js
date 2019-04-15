@@ -21,15 +21,6 @@ export default class Home extends Component {
     const { first_name } = this.state.user;
     let link = { color: "gray", textDecoration: "none" };
 
-    const { styling } = {
-      backgroundColor: "lightgrey",
-      width: "100%",
-      border: "25px",
-      borderColor: "solid green",
-      padding: "25px",
-      margin: "25px"
-    };
-
     return (
       <div>
         <div className="currentUser">
@@ -39,18 +30,18 @@ export default class Home extends Component {
         <Card>
           <Card.Content className="card">
             <Link to={`/service/oil-change`} style={link}>
-              <span id="oil_change" value="Oil Change">
+              <span value="Oil Change">
                 <Card.Header className="cardheader">Oil Change</Card.Header>
               </span>
             </Link>
           </Card.Content>
         </Card>
         <br style={{ lineHeight: "2rem" }} />
-        <Card className="card">
-          <Card.Content>
+        <Card>
+          <Card.Content className="card">
             {/* <Card.Header>Brakes</Card.Header> */}
-            <Link to={`/service/brakes`}>
-              <span id="brakes" value="Brakes">
+            <Link to={`/service/brakes`} style={link}>
+              <span value="Brakes">
                 <Card.Header className="cardheader">Brakes</Card.Header>
               </span>
             </Link>
