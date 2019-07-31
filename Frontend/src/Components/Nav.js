@@ -10,7 +10,7 @@ export default class Nav extends Component {
       display: "inline-block",
       textDecoration: "none",
       margin: "25px",
-      // backgroundColor: "red	",
+      // backgroundColor: "orange	",
       border: "solid 3px",
       marginTop: "1px",
       borderRadius: "15px",
@@ -20,14 +20,14 @@ export default class Nav extends Component {
       <div className="nav">
         <br style={{ lineHeight: "3rem" }} />
         <div
-          style={{ width: "100%", borderTop: "2px", borderTopColor: "gray" }}
+          style={{ width: "100%", borderTop: "2px", borderTopColor: "orange" }}
         >
           <NavLink
             to={`/users/${this.props.user_id}`}
             exact
             style={link}
             activeStyle={{
-              background: "red"
+              background: "orange"
             }}
           >
             Home
@@ -37,7 +37,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "red"
+              background: "orange"
             }}
           >
             About
@@ -47,7 +47,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "red"
+              background: "orange"
             }}
           >
             Orders
@@ -57,7 +57,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "red"
+              background: "orange"
             }}
           >
             Admin
@@ -74,7 +74,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "gray"
+              background: "orange"
             }}
           >
             Home
@@ -84,7 +84,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "gray"
+              background: "orange"
             }}
           >
             About
@@ -94,7 +94,7 @@ export default class Nav extends Component {
             exact
             style={link}
             activeStyle={{
-              background: "gray"
+              background: "orange"
             }}
           >
             Orders

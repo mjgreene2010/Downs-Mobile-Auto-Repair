@@ -84,10 +84,10 @@ export default class Order extends Component {
               {filteredOrders.map(data => {
                 let earliest = new Date(data.requested_time_earliest);
                 let latest = new Date(data.requested_time_latest);
-                let earliestHours = earliest.getHours();
-                let earliestMinutes = earliest.getMinutes();
-                let latestHours = latest.getHours();
-                let latestMinutes = latest.getMinutes();
+                let earliestHours = earliest.getUTCHours();
+                let earliestMinutes = earliest.getUTCMinutes();
+                let latestHours = latest.getUTCHours();
+                let latestMinutes = latest.getUTCMinutes();
 
                 earliestHours = ("0" + earliestHours).slice(-2);
                 earliestMinutes = ("0" + earliestMinutes).slice(-2);
@@ -96,7 +96,7 @@ export default class Order extends Component {
 
                 return (
                   <Table.Row key={data.id}>
-                    <Table.Cell className="tableCell">Fixmy car</Table.Cell>
+                    <Table.Cell className="tableCell">Fix my car</Table.Cell>
                     <Table.Cell className="tableCell">
                       {data.requested_date}
                     </Table.Cell>

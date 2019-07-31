@@ -10,7 +10,7 @@
 
   font-family: "Anton", sans-serif;
 
-  color: red;
+  color: rgb(255, 115, 0);
 }
 
 .App-logo {
@@ -44,17 +44,17 @@
 }
 
 .cardheader {
-  background-color: lightgrey;
+  background-color: rgb(0, 0, 0, 0.75);
   border: 25px;
   padding: 25px;
   margin: 25px;
-  outline: gray dotted thick;
+  outline: rgb(255, 115, 0) dotted thick;
   /* opacity: 10; */
 }
 
 .currentUser {
   font-family: "Anton", sans-serif;
-  color: gray;
+  color: rgb(255, 115, 0);
   margin: 25px;
   font-size: 30px;
   text-shadow: 2px 2px 0 #000, 2px 2px 0 #000, 2px 2px 0 #000, 2px 2px 0 #000;
@@ -71,30 +71,46 @@
 .username,
 .first_name,
 .last_name {
-  border: 2px solid red;
+  border: 2px solid rgb(255, 115, 0);
   border-radius: 4px;
-  background-color: orange;
+  /* background-color:  rgb(255, 115, 0); */
 }
 .password {
-  border: 2px solid red;
+  border: 2px solid rgb(255, 115, 0);
   border-radius: 4px;
-  background-color: orange;
+  /* background-color:  rgb(255, 115, 0); */
 }
 .login,
 .signup {
-  border: 2px solid red;
+  border: 2px solid rgb(255, 115, 0);
   border-radius: 4px;
-  background-color: orange;
+  /* background-color:  rgb(255, 115, 0); */
 }
 
 .nav {
   flex-direction: row;
   display: inline-flex;
 }
+
+.ownerInfo {
+  margin-left: 5px;
+}
+
+.ownerBio {
+  float: right;
+  margin-right: 36%;
+}
+
+.ownerPic {
+}
+
 .prehome {
   position: absolute;
-  top: 2.9rem;
-  right: 0.25rem;
+  overflow: scroll;
+  top: 43px;
+  right: 10px;
+  background-color: rgb(255, 115, 0);
+  border: solid;
 }
 .side1,
 .side2 {

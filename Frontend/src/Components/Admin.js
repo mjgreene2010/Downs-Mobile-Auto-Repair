@@ -120,7 +120,11 @@ export default class Admin extends Component {
                       {this.renderOrderStatus(order.decision)}
                     </td>
                     <td className="tableCell">
-                      <OrderDetails data={order} />
+                      <OrderDetails
+                        data={order}
+                        acceptOrder={this.acceptOrder}
+                        declineOrder={this.declineOrder}
+                      />
                       <button onClick={() => this.deleteOrder(order.id)}>
                         Delete
                       </button>

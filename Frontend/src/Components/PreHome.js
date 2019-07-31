@@ -34,7 +34,10 @@ export default class PreHome extends Component {
       </div>
     ) : (
       <div className="prehome">
-        <span style={{}}>{first_name}</span>/
+        <Link to="/usersprofile/:id">
+          <span style={{}}>{first_name}</span>
+        </Link>
+        /
         <Link to="/users/null" style={{}} onClick={this.logOut}>
           Log out
         </Link>

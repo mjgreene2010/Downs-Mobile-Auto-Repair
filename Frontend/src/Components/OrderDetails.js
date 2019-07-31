@@ -27,10 +27,10 @@ export default class OrderDetails extends Component {
     let data = this.props.data;
     let earliest = new Date(data.requested_time_earliest);
     let latest = new Date(data.requested_time_latest);
-    let earliestHours = earliest.getHours();
-    let earliestMinutes = earliest.getMinutes();
-    let latestHours = latest.getHours();
-    let latestMinutes = latest.getMinutes();
+    let earliestHours = earliest.getUTCHours();
+    let earliestMinutes = earliest.getUTCMinutes();
+    let latestHours = latest.getUTCHours();
+    let latestMinutes = latest.getUTCMinutes();
 
     earliestHours = ("0" + earliestHours).slice(-2);
     earliestMinutes = ("0" + earliestMinutes).slice(-2);

@@ -10,6 +10,7 @@ import Service from "./Components/Service";
 import Admin from "./Components/Admin";
 import About from "./Components/About";
 import Orders from "./Components/Order";
+import UserProfile from "./Components/UserProfile";
 import "./App.css";
 // import * as serviceWorker from "./serviceWorker";
 let user;
@@ -47,7 +48,7 @@ export default class App extends Component {
 
   render() {
     return this.state.user.admin === true ? (
-      <div>
+      <div className="container">
         <hr />
         <div className="header">Down's Mobile Auto Repair</div>
         <hr />
@@ -178,6 +179,18 @@ export default class App extends Component {
               path="/orders"
               render={props => (
                 <Orders
+                  {...props}
+                  user={this.state.user.id}
+                  token={this.state.token}
+                />
+              )}
+            />
+
+            <Route
+              exact
+              path="/userprofile/:id"
+              render={props => (
+                <UserProfile
                   {...props}
                   user={this.state.user.id}
                   token={this.state.token}
