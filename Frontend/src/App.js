@@ -106,6 +106,9 @@ export default class App extends Component {
             />
 
             <Route exact path="/about" component={About} />
+
+            <Route exact path="/userprofile" />
+
             <Route
               exact
               path="/orders"
@@ -121,85 +124,85 @@ export default class App extends Component {
         </Router>
       </div>
     ) : (
-      // );
-      <div>
-        <hr />
-        <div className="header">Down's Mobile Auto Repair</div>
-        <hr />
-        <div className="header" />
+        // );
+        <div>
+          <hr />
+          <div className="header">Down's Mobile Auto Repair</div>
+          <hr />
+          <div className="header" />
 
-        {/* <span style={{ float: "right" }}> {first_name} </span> */}
-        <br />
-        <Router>
-          <React.Fragment>
-            <Route
-              exact
-              path="/users/:id"
-              render={props => (
-                <PreHome
-                  {...props}
-                  currentName={this.state.user.first_name}
-                  token={this.state.token}
-                />
-              )}
-            />
+          {/* <span style={{ float: "right" }}> {first_name} </span> */}
+          <br />
+          <Router>
+            <React.Fragment>
+              <Route
+                exact
+                path="/users/:id"
+                render={props => (
+                  <PreHome
+                    {...props}
+                    currentName={this.state.user.first_name}
+                    token={this.state.token}
+                  />
+                )}
+              />
 
-            <Nav user_id={this.state.user.id} />
-            <Route
-              path="/users/:id"
-              component={props => <Home {...props} token={this.state.token} />}
-            />
-            <Route
-              exact
-              path="/login"
-              render={props => (
-                <Login
-                  {...props}
-                  onLogin={this.setCurrentUser}
-                  isLoggedIn={this.isLoggedIn}
-                />
-              )}
-            />
-            <Route exact path="/signup" component={SignUp} />
-            <Route
-              exact
-              path="/service/:id"
-              render={props => (
-                <Service
-                  {...props}
-                  token={this.state.token}
-                  user={this.state.user}
-                />
-              )}
-            />
+              <Nav user_id={this.state.user.id} />
+              <Route
+                path="/users/:id"
+                component={props => <Home {...props} token={this.state.token} />}
+              />
+              <Route
+                exact
+                path="/login"
+                render={props => (
+                  <Login
+                    {...props}
+                    onLogin={this.setCurrentUser}
+                    isLoggedIn={this.isLoggedIn}
+                  />
+                )}
+              />
+              <Route exact path="/signup" component={SignUp} />
+              <Route
+                exact
+                path="/service/:id"
+                render={props => (
+                  <Service
+                    {...props}
+                    token={this.state.token}
+                    user={this.state.user}
+                  />
+                )}
+              />
 
-            <Route exact path="/about" component={About} />
-            <Route
-              exact
-              path="/orders"
-              render={props => (
-                <Orders
-                  {...props}
-                  user={this.state.user.id}
-                  token={this.state.token}
-                />
-              )}
-            />
+              <Route exact path="/about" component={About} />
+              <Route
+                exact
+                path="/orders"
+                render={props => (
+                  <Orders
+                    {...props}
+                    user={this.state.user.id}
+                    token={this.state.token}
+                  />
+                )}
+              />
 
-            <Route
-              exact
-              path="/userprofile/:id"
-              render={props => (
-                <UserProfile
-                  {...props}
-                  user={this.state.user.id}
-                  token={this.state.token}
-                />
-              )}
-            />
-          </React.Fragment>
-        </Router>
-      </div>
-    );
+              <Route
+                exact
+                path="/userprofile/:id"
+                render={props => (
+                  <UserProfile
+                    {...props}
+                    user={this.state.user.id}
+                    token={this.state.token}
+                  />
+                )}
+              />
+            </React.Fragment>
+          </Router>
+        </div>
+      );
   }
 }

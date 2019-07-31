@@ -26,7 +26,7 @@ export default class Home extends Component {
         <div className="currentUser">
           <h1>{first_name}</h1>
         </div>
-        <br style={{ lineHeight: "1rem" }} />
+        {/* <br style={{ lineHeight: "1rem" }} /> */}
         <Card>
           <Card.Content className="card">
             <Link to={`/service/oil-change`} style={link}>

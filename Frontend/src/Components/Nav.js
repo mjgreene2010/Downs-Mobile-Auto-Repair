@@ -5,7 +5,7 @@ import "./Nav.css";
 export default class Nav extends Component {
   render() {
     const link = {
-      width: "50px",
+      width: "medium",
       color: "black",
       display: "inline-block",
       textDecoration: "none",
@@ -62,45 +62,65 @@ export default class Nav extends Component {
           >
             Admin
           </NavLink>
+          <NavLink
+            to="/userprofile"
+            exact
+            style={link}
+            activeStyle={{
+              background: "orange"
+            }}
+          >
+            User Profile
+          </NavLink>
         </div>
       </div>
     ) : (
-      // );
-      <div className="nav">
-        <br style={{ lineHeight: "3rem" }} />
-        <div style={{ width: "100%" }}>
-          <NavLink
-            to={`/users/${this.props.user_id}`}
-            exact
-            style={link}
-            activeStyle={{
-              background: "orange"
-            }}
-          >
-            Home
+        // );
+        <div className="nav">
+          <br style={{ lineHeight: "3rem" }} />
+          <div style={{ width: "100%" }}>
+            <NavLink
+              to={`/users/${this.props.user_id}`}
+              exact
+              style={link}
+              activeStyle={{
+                background: "orange"
+              }}
+            >
+              Home
           </NavLink>{" "}
-          <NavLink
-            to="/about"
-            exact
-            style={link}
-            activeStyle={{
-              background: "orange"
-            }}
-          >
-            About
+            <NavLink
+              to="/about"
+              exact
+              style={link}
+              activeStyle={{
+                background: "orange"
+              }}
+            >
+              About
           </NavLink>{" "}
-          <NavLink
-            to="/orders"
-            exact
-            style={link}
-            activeStyle={{
-              background: "orange"
-            }}
-          >
-            Orders
+            <NavLink
+              to="/orders"
+              exact
+              style={link}
+              activeStyle={{
+                background: "orange"
+              }}
+            >
+              Orders
           </NavLink>{" "}
+            <NavLink
+              to="/userprofile"
+              exact
+              style={link}
+              activeStyle={{
+                background: "orange"
+              }}
+            >
+              User Profile
+          </NavLink>
+          </div>
         </div>
-      </div>
-    );
+      );
   }
 }

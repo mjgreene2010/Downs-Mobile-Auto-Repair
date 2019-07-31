@@ -44,12 +44,23 @@
 }
 
 .cardheader {
+        /* width: medium;
+        color: black;
+        display: inline-block;
+        text-decoration: none;
+        margin: 25px;
+        border: solid 3px;
+        margin-top: 1px;
+        border-radius: 15px;
+        padding: 5px */
   background-color: rgb(0, 0, 0, 0.75);
   border: 25px;
   padding: 25px;
   margin: 25px;
   outline: rgb(255, 115, 0) dotted thick;
-  /* opacity: 10; */
+  opacity: 10;
+  /* width: medium; */
+  display: inline-block
 }
 
 .currentUser {
